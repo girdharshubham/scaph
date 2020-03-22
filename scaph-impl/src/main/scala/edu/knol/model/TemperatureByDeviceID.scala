@@ -1,13 +1,15 @@
-package edu.knol.database.model
+package edu.knol.model
 
+import com.outworkers.phantom
 import com.outworkers.phantom.dsl._
 import edu.knol.database.Temperature
 
 import scala.concurrent.Future
 
 abstract class TemperatureByDeviceID extends Table[TemperatureByDeviceID, Temperature] {
+  import edu.knol.utils._
 
-  override def tableName: String = "temperature"
+  override def tableName: String = Constants.TableName
 
   object deviceId extends UUIDColumn with PartitionKey {
     override def name: String = "deviceid"
@@ -33,5 +35,11 @@ abstract class TemperatureByDeviceID extends Table[TemperatureByDeviceID, Temper
       .all()
       .where(_.deviceId eqs deviceId)
       .one()
+
+  def deleteTemperatureByDeviceid(uuid: UUID): Future[phantom.ResultSet] =
+    delete()
+    .where(_.deviceId eqs uuid )
+    .consistencyLevel_=(ConsistencyLevel.ONE)
+    .future()
 
 }

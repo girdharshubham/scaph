@@ -6,10 +6,14 @@ object Constants {
   private val CassandraHostKey: String = "cassandra.contact-point"
   private val CassandraPortKey: String = "cassandra.port"
   private val KeySpaceKey: String = "cassandra.keyspace"
+  private val TableNameKey: String = "cassandra.table"
 
-  val CassandraHost: String = knol.config.getString(CassandraHostKey)
-  val CassandraPort: Int = knol.config.getInt(CassandraPortKey)
-  val KeySpace = knol.config.getString(KeySpaceKey)
-  implicit val Connector: CassandraConnection = ContactPoint(CassandraHost, CassandraPort)
+  import knol._
+
+  lazy val CassandraHost: String = config.getString(CassandraHostKey)
+  lazy val CassandraPort: Int = config.getInt(CassandraPortKey)
+  lazy val KeySpace: String = config.getString(KeySpaceKey)
+  lazy val TableName: String = config.getString(TableNameKey)
+  lazy implicit val Connector: CassandraConnection = ContactPoint(CassandraHost, CassandraPort)
     .keySpace(KeySpace)
 }

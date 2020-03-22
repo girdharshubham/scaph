@@ -2,7 +2,7 @@ package edu.knol.database
 
 import com.outworkers.phantom.connectors.CassandraConnection
 import com.outworkers.phantom.dsl._
-import edu.knol.database.model.TemperatureByDeviceID
+import edu.knol.model.TemperatureByDeviceID
 
 class TemperatureDatabase(implicit cassandraConnection: CassandraConnection)
   extends Database[TemperatureDatabase](cassandraConnection) {
