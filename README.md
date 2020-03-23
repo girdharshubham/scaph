@@ -3,7 +3,7 @@ Scala Phantom Cassandra
 
 Phantom is a reactive type-safe Scala driver for Apache Cassandra/Datastax Enterprise.
 
-Testing the template with docker :
+## Testing the template with docker :
 ```
 docker run -d -p 9042:9042 cassandra:latest
 export CONTACTPOINT="localhost"
